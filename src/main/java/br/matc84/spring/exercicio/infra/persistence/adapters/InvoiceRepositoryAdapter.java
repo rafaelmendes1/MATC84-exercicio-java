@@ -36,4 +36,16 @@ public class InvoiceRepositoryAdapter implements InvoiceRepositoryPort {
 
         return invoice.map(InvoiceMapper::toModel);
     }
+
+    @Override
+    public InvoiceModel create(BigDecimal totalValue, LocalDate dueDate) {
+        InvoiceEntity.InvoiceEntityBuilder builder = InvoiceEntity.InvoiceEntityBuilder.anInvoiceEntity();
+
+        builder.withUuid(UUID.randomUUID().toString());
+        builder.withTotalValue(totalValue);
+        builder.withDueDate(dueDate);
+        builder.withCreatedAt(LocalDateTime.now());
+
+        return InvoiceMapper.toModel(this.invoiceRepository.save(builder.build()));
+    }
 }

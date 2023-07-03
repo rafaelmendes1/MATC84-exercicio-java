@@ -2,9 +2,12 @@ package br.matc84.spring.exercicio.infra.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+import br.matc84.spring.exercicio.api.dtos.InvoiceDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -37,5 +40,10 @@ public class InvoiceServiceImpl implements InvoiceServicePort {
         }
 
         throw new InvoiceNotFoundException(uuid);
+    }
+
+    @Override
+    public InvoiceModel create(BigDecimal totalValue, LocalDate dueDate) {
+        return this.invoiceRepositoryPort.create(totalValue, dueDate);
     }
 }

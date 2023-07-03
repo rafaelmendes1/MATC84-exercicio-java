@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.matc84.spring.exercicio.api.dtos.InvoiceDTO;
 import br.matc84.spring.exercicio.domain.models.InvoiceModel;
 
 public interface InvoiceServicePort {
     public List<InvoiceModel> getAll();
     public InvoiceModel findById(String uuid);
+    InvoiceModel create(BigDecimal totalValue, LocalDate dueDate);
 }
